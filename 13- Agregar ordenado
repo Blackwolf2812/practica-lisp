@@ -1,0 +1,7 @@
+(defun agregarOrd (lista n)
+     (cond
+           ((null lista) (cons n lista))
+           ((<= n (first lista)) (cons n lista))
+           ((> n (first lista)) (cons (first lista) (agregarOrd (rest lista) n)))
+     )
+)
