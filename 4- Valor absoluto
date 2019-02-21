@@ -1,0 +1,8 @@
+(defun Absol (n)
+     (Cond
+          (
+               (>= n 0) n)
+               (< n 0) (* n -1)
+          )
+     )
+)                                 ;Nota General: Evitar encerrar entre paréntesis elementos que representan directamente valores y no funciónes.
