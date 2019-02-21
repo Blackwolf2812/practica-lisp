@@ -1,0 +1,28 @@
+;Primero recordamos la función definida para el contéo de la cantidad de elementos de una lista.
+
+(defun cant (lista)
+     (cond
+          ((null lista) 0)
+          (not (null lista)) (+ 1 (rest lista))
+          )
+     )
+)
+
+;Luego definimos una función que nos permita realizar la sumatoria de los elementos de una lista.
+
+(defun sumatoria (lista)
+     (cond
+          ((null lista) 0)
+          (not (null lista)) (+ (first lista) (sumatoria (rest lista)))
+          )
+     )
+)
+
+;Y finalmente definimos la función promedio.
+
+(Defun promedio (lista)
+     (cond
+          ((null lista) nil)
+          (not (null lista)) ( / (sumatoria lista) (cant lista))
+     )
+)
