@@ -1,0 +1,8 @@
+(defun agregar (lista i n)
+     (cond
+          ((null lista) (cons (n lista)))
+          ((< i 0) nil)
+          ((= i 0) (cons n ( lista))
+          ((> i 0) (cons (first lista) (agregar (rest lista) (- i 1) n))
+     )
+)
