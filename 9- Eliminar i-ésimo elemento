@@ -1,0 +1,7 @@
+(defun eliminari (lista i)
+    (cond
+        ((null lista) nil)                                                ;Si la lista está vacía, la función devolverá Nil.
+        ((=  i 0) (remove (first lista) lista))                           ;Si la posición a eliminar es la primera de todas, utilizamos remove para ejecutar la eliminación. '(first lista)' representa el prmer elemento de la lista, es decir, su actual cabecera.
+        ((> i 0) (cons (first lista) (eliminari (rest lista) (- i 1))))   ;La palabra reservada 'cons' se utiliza para construir una lista con los parámetros asignados, y tiene la forma (cons (param1) (param2)).
+    )                                                                     ;Utilizamos recursividad en la línea anterior para decrementar i, y así poder llegar a la posición deseada.
+)
