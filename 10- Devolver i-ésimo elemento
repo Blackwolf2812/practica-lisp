@@ -1,0 +1,7 @@
+(defun devolveri (lista i)
+     (cond
+          ( (< i 0) nil )
+          ( (= i 0) (first lista) )
+          ((> i 0) (devolveri (rest lista) (- i 1))
+     )
+)
