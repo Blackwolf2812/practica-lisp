@@ -1,0 +1,6 @@
+(defun contar (lista)
+     (cond
+          ((null lista) 0)                                ;'(null lista)' representa una lista vacía. Por ende, según esta condición, si la lista en cuestión está vacía, la función reornará un 0.
+          ((not (null lista)) (+ 1 contar(rest lista)))   ;'(rest lista)' representa al resto de la lista, es decir, la lista luego de haber quitado su actual cabecera.
+     )
+)
