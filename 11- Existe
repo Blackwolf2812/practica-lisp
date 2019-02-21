@@ -1,0 +1,10 @@
+;Nota: El hecho de que se trate de un objeto, nos sugiere que, por ejemplo, un 3(numero) y un 3(char) no cuentan como equivalentes.
+;Por ende, para comparar elementos, utilizaremos la palabra reservada 'eq' en lugar de un '='.
+
+(defun existe (lista elemento)
+     (cond
+          ((null lista) nil))
+          ( (eq (first lista) (elemento)) t )                                       ;En lisp, se utiliza 't' en lugar de 'true'.
+          ( (not (eq (first lista) (elemento))) (existe ((rest lista) elemento)) )
+     )
+)
