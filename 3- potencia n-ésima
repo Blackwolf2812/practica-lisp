@@ -1,0 +1,8 @@
+(defun npotencia (x n)
+	(cond                                                     ;La palabra reservada 'cond' se utiliza para definir condiciónes.
+		((and (= x 0) (= n 0)) nil)                             ;Posee la forma '(cond ((condición1) (consecuencia1)) ((condicion2)(consecuencia2)) ... ((condicionN)(efectoN)) )'.
+		((and (= x 0) (/= n 0)) 0)                              ;En este caso, también se utiliza 'and' para asociar una conjunción de condiciones a una consecuencia.
+		((and (/= x 0) (= n 0)) 1)
+		((and (/= x 0) (> n 0)) (* x (npotencia x (- n 1))))    ;Por último hacemos uso de la recursividad para compensar el no poder utilizar ciclos.
+	)
+)
