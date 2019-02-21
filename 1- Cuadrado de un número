@@ -1,0 +1,3 @@
+(Defun cuadrado (x)
+     (* x x)           
+)                                  
