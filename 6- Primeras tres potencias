@@ -1,0 +1,4 @@
+(defun ejer6 (x)
+     (+ (npotencia x 1) (npotencia x 2) ;Aquí directamente nos valemos de la función definida en el ejercicio 4.
+     (npotencia (x 3))
+)
