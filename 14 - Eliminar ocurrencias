@@ -1,0 +1,78 @@
+;-------------------------------------------------------------------------------------------------------------------
+; Normalmente, para una consigna como esta, uno optaría por utilizar la función "remove(x l)",
+; la cual hace exactamente lo solicitado en la consigna.
+
+(defun ocurrencias (v1 l1) (remove v1 l1))
+
+(write (write-to-string(ocurrencias 5 '(2 2 1 5 7 5 5 8 10 5)))); la función "write-to-string", se utiliza para
+;																  transformar una lista de elementos en una cadena.
+; En este caso, lo usaremos para que el intérprete nos arroje un resultado visible en pantalla.
+;-------------------------------------------------------------------------------------------------------------------
+
+; Sin embargo, en éste apartado de práctica, se nos pide resolver las problemáticas presentadas mediante funciones
+; recursivas.
+
+;-------------------------------------------------------------------------------------------------------------------
+
+; Este fue el primer intento, con la intención de aplicar un dolist.
+
+	(defun ocurrencias(v1 l1)
+		(dolist (x l1) (cond
+			((eq x v1) (delete v1 l1))
+			)
+		)
+	)
+
+;Tuve que poner todo en una sola línea para poder probarlo.
+
+(defun ocurrencias(v1 l1) (dolist (x l1) (cond((eq x v1) (delete v1 l1)))))
+
+(write ocurrencias(5 '(2 2 1 5 7 5 5 8 10 5)))
+;-------------------------------------------------------------------------------------------------------------------
+
+; El intérprete no ofreció ningún resultado satisfactorio, razón por la cual,
+; terminé decantándome por la concatenación mediante el uso de "cons".
+
+(defun ocurrenciasRec(v1 l1)
+	(cond
+		((null l1) nil)
+		((not(null l1))
+			(cond
+				((eq v1 (first l1)) (and (delete(first l1)l1)(cons (first l1)(ocurrenciasRec v1 (rest l1))))); Si el elemento a buscar resulta igual que la cabecera, elimina la cabecera y concatena la nueva cabecera con la funcion aplicada al resto de la lista.
+				((not(eq v1 (first l1))) (cons (first l1)(ocurrenciasRec v1 (rest l1)))); Sino, simplemente conatena la cabecera sin eliminar con la función aplicada en el resto de la lista.
+			)
+		)
+	)
+)
+
+; Nuevamente escribo el mismo código, pero en una sola línea.
+
+(defun ocurrenciasRec(v1 l1)(cond((null l1) nil)((not(null l1))(cond((eq v1 (first l1)) (and (delete(first l1)l1)(cons (first l1)(ocurrenciasRec v1 (rest l1)))))((not(eq v1 (first l1))) (cons (first l1)(ocurrenciasRec v1 (rest l1))))))))
+(write (write-to-string(ocurrenciasRec 5 '(2 2 1 5 7 5 5 8 10 5))))
+
+;-------------------------------------------------------------------------------------------------------------------
+
+; Sin embargo, cuando "asume" la nueva cabecera, y se aplica ocurrenciasRec en el resto de la lista,
+; la nueva cabecera ya queda fuera de la evaluación.
+; Esto provoca que, por ejemplo, aún habiéndole dado un 5 ala función como objetivo a eliminar,
+; el intérprete nos devuelva también un 5. Puntualmente, el que se encuentra ántes del 8.
+
+(defun ocurrenciasRec(v1 l1)
+	(cond
+		((null l1) nil)
+		((not(null l1))
+			(cond
+				((eq v1 (first l1)) (and (delete(first l1)l1)(cons (first (ocurrenciasRec v1 (rest l1)))(ocurrenciasRec v1 (rest (rest l1)))))); Entonces llegamos a la incómoda (pero efectiva) solución de concatenar la cabecera que resulte de aplicar la funcion al resto de la lista... con el resto del resto de la lista.
+				((not(eq v1 (first l1))) (cons (first l1)(ocurrenciasRec v1 (rest l1)))); mientras que la otra condición se mantiene igual que en el intento anterior.
+			)
+		)
+	)
+)
+
+; Nuevamente escribo el mismo código, pero en una sola línea.
+
+(defun ocurrenciasRec(v1 l1)(cond((null l1) nil)((not(null l1))(cond((eq v1 (first l1)) (and (delete(first l1)l1)(cons (first (ocurrenciasRec v1 (rest l1)))(ocurrenciasRec v1 (rest (rest l1))))))))))
+
+(write (write-to-string(ocurrenciasRec 5 '(2 2 1 5 7 5 5 8 10 5)))); E imprimo el resultado en pantalla, mostrando que,
+;																	 efectivamente, el parámetro enviado se eliminó
+;																	 sin inconvenientes.
