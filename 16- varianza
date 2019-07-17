@@ -1,0 +1,49 @@
+;Escriba una función que determine la Varianza de una lista de números
+;Varianza = Sumatoria (Xi - Media)2 / (n - 1) siendo Xi cada uno de los n elementos de la lista
+
+;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+(defun sumatoria(l);	Definimos una función de sumatoria genérica.
+	(cond
+		((null l)0)
+		((not(null l))(+ (first l)(sumatoria (rest l))))
+	)
+)
+
+(defun contar (lista);	Función ya definida en el Ejercicio 7. Cuenta la cantidd de elementos de una lista.
+	(cond
+		((null lista) 0)
+		((not (null lista)) (+ 1 (contar (rest lista))))
+	)
+)
+
+(defun promedio (l);	Definimos una función de promedio.
+	(cond
+		((null l)0)
+		((not (null l))(/(sumatoria l)(contar l)))
+	)
+)
+
+(defun termvar(l m); Esta función aplica la óperación pertinente e cada térino de la suatoria, a cada elemento de la sumatoria. Y construye una lista con esos nuevos elementos.
+	(cond
+		((null m)nil)
+		((not(null m))(cons (/ (* (- (first m) (promedio l))(- (first m) (promedio l)))(- (contar l) 1))(termvar l (rest m))))
+	)
+);					En la función final, 'l' y 'm' serán la misma lista.
+
+(defun varianza (l); Finalmente, la función varianza simplemente realiza la sumatoria de los elementos modificados de la lista 'l'.
+	(cond
+		((null l)0)
+		((sumatoria(termvar l l)))
+	)
+)
+
+;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+; Escribo nuevamente las funciones anteriores, cada una en unaúnica línea, para poder probarlas en GNU CLISP.
+
+(defun sumatoria(l)(cond ((null l)0)((not(null l))(+ (first l)(sumatoria (rest l))))))
+(defun contar (lista)(cond((null lista) 0)((not (null lista)) (+ 1 (contar (rest lista))))))
+(defun promedio (l)(cond((null l)0)((not (null l))(/(sumatoria l)(contar l)))))
+(defun termvar(l m)(cond((null m)nil)((not(null m))(cons (/ (* (- (first m) (promedio l))(- (first m) (promedio l)))(- (contar l) 1))(termvar l (rest m))))))
+(defun varianza (l)(cond((null l)0)((sumatoria(termvar l l)))))
+(write(write-to-string(varianza '(2 3 5 10))))
+;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
